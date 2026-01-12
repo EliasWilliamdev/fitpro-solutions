@@ -27,10 +27,16 @@ import IMG_0220 from './assets/img/IMG_0220.jpg';
 import IMG_1861 from './assets/img/IMG_1861.jpg';
 import IMG_1874 from './assets/img/IMG_1874.jpg';
 import IMG_1876 from './assets/img/IMG_1876.PNG';
+import GALERIA1 from './assets/img/ACADEMIA.jpeg';
+import GALERIA2 from './assets/img/ACADEMIA FOTO 2.jpeg';
+import GALERIA3 from './assets/img/ACADEMIA FOTO 3.jpeg';
+import GALERIA4 from './assets/img/ACADEMIA FOTO 4.jpeg';
+import GALERIA5 from './assets/img/ACADEMIA FOTO 5.jpg';
 import  SAOMIGUEL from './assets/img/TujuBoutiqueHotel.png';
 import  GUADALUPE from './assets/img/CondominioGuadalupe.png';
 import  CASALTA from './assets/img/CasaAlta.png';
 import  CASASERRAMBI from './assets/img/CasaSerrambi.png';
+import FitproLogo from './FitproLogo';
 
 // --- Types ---
 
@@ -49,7 +55,7 @@ const NAV_LINKS = [
   { name: 'O que fazemos', href: '#about' },
   { name: 'Como funciona', href: '#process' },
   { name: 'Cases', href: '#cases' },
-  { name: 'Benefícios', href: '#benefits' },
+  { name: 'Diferenciais', href: '#benefits' },
 ];
 
 const PROCESS_STEPS = [
@@ -245,6 +251,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     </div>
                   </div>
 
+
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-400 mb-1.5">Empresa / Condomínio</label>
                     <input 
@@ -252,6 +259,17 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                       id="company" 
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                       placeholder="Nome do local"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="location" className="block text-sm font-medium text-gray-400 mb-1.5">Local (Cidade/Estado)</label>
+                    <input
+                      type="text"
+                      id="location"
+                      required
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
+                      placeholder="Ex: Recife/PE"
                     />
                   </div>
 
@@ -313,14 +331,9 @@ const Navbar: React.FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-brand-dark/90 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          {/* Logo Placeholder */}
-          <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center rotate-45">
-            <div className="-rotate-45">
-              <Dumbbell className="text-white w-6 h-6" />
-            </div>
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-white">FIT<span className="text-brand-orange">PRO</span></span>
+        <div className="flex items-center">
+          {/* Logo Image */}
+          <FitproLogo className="h-12 w-auto" />
         </div>
 
         {/* Desktop Nav */}
@@ -417,7 +430,7 @@ const Hero: React.FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl font-light">
-              Especialistas em transformar espaços em academias de alto valor agregado para residências, condomínios, pousadas e hotéis.
+              Especialistas em transformar espaços em academias de alto valor agregado para residências, condomínios, pousadas, hotéis e clubes.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -585,7 +598,7 @@ const Benefits: React.FC = () => {
           <div className="order-1 md:order-2">
             <SectionHeading subtitle="Diferenciais" title="Por que escolher a FITPRO?" />
             <p className="text-gray-300 mb-6">
-              Nossa abordagem vai além da venda de equipamentos. Entregamos uma consultoria completa que valoriza seu imóvel, garante a satisfação dos usuários e otimiza cada centavo investido.
+              Nossa abordagem vai além da venda de equipamentos. Entregamos uma consultoria completa que valoriza seu imóvel, garante a satisfação dos usuários, otimizando o seu investimento.
             </p>
             
             <div className="mt-8 space-y-4">
@@ -612,7 +625,7 @@ const Cases: React.FC = () => {
   return (
     <section id="cases" className="py-24 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeading subtitle="Portfólio" title="Principais Cases" />
+        <SectionHeading subtitle="Portfólio" title="Alguns Cases" />
 
         <div className="grid lg:grid-cols-12 gap-8 mt-12">
           {/* List of cases (Desktop Sidebar / Mobile Top) */}
@@ -680,6 +693,11 @@ const GALLERY_IMAGES = [
   { src: IMG_1861, alt: 'Galeria FitPro 5' },
   { src: IMG_1874, alt: 'Galeria FitPro 6' },
   { src: IMG_1876, alt: 'Galeria FitPro 7' },
+  { src: GALERIA1, alt: 'Academia geral' },
+  { src: GALERIA2, alt: 'Halteres Alpha Strong' },
+  { src: GALERIA3, alt: 'Equipamento de musculação' },
+  { src: GALERIA4, alt: 'Visão ampla academia' },
+  { src: GALERIA5, alt: 'Exercício leg press' },
 ];
 
 const Gallery: React.FC = () => {
