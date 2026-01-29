@@ -163,6 +163,25 @@ interface ContactModalProps {
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success'>('idle');
 
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let digits = (e.target.value || '').replace(/\D/g, '');
+    if (digits.length > 11) digits = digits.slice(0, 11);
+
+    let formatted = digits;
+    if (digits.length <= 2) {
+      formatted = `(${digits}`;
+    } else if (digits.length <= 6) {
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+    } else if (digits.length <= 10) {
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+    } else {
+      // 11 digits (mobile)
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;
+    }
+
+    e.target.value = formatted;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -254,7 +273,9 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         type="tel" 
                         id="phone"
                         name="phone"
+                        inputMode="tel"
                         required
+                        onChange={handlePhoneInput}
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                         placeholder="(DDD) 00000-0000"
                       />
