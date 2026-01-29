@@ -165,12 +165,30 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+    const name = (fd.get('name') as string) || '';
+    const phone = (fd.get('phone') as string) || '';
+    const email = (fd.get('email') as string) || '';
+    const company = (fd.get('company') as string) || '';
+    const location = (fd.get('location') as string) || '';
+    const messageText = (fd.get('message') as string) || '';
+
     setFormState('loading');
-    
-    // Simulate API call
+
+    const composed = `Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20diagn%C3%B3stico.%0A%0ANome%3A%20${encodeURIComponent(name)}%0ATelefone%3A%20${encodeURIComponent(phone)}%0AEmail%3A%20${encodeURIComponent(email)}%0AEmpresa%3A%20${encodeURIComponent(company)}%0ALocal%3A%20${encodeURIComponent(location)}%0AMensagem%3A%20${encodeURIComponent(messageText)}`;
+
+    // Official WhatsApp link (international format without plus)
+    const waNumber = '5581985135413';
+    const waLink = `https://wa.me/${waNumber}?text=${composed}`;
+
+    // Open WhatsApp in a new tab/window
+    window.open(waLink, '_blank');
+
+    // Mark success after opening
     setTimeout(() => {
       setFormState('success');
-    }, 1500);
+    }, 800);
   };
 
   return (
@@ -221,7 +239,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1.5">Nome Completo</label>
                     <input 
                       type="text" 
-                      id="name" 
+                      id="name"
+                      name="name"
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                       placeholder="Seu nome"
@@ -233,7 +252,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-400 mb-1.5">Telefone</label>
                       <input 
                         type="tel" 
-                        id="phone" 
+                        id="phone"
+                        name="phone"
                         required
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                         placeholder="(DDD) 00000-0000"
@@ -243,7 +263,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                       <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1.5">E-mail</label>
                       <input 
                         type="email" 
-                        id="email" 
+                        id="email"
+                        name="email"
                         required
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                         placeholder="seu@email.com"
@@ -256,7 +277,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     <label htmlFor="company" className="block text-sm font-medium text-gray-400 mb-1.5">Empresa / Condomínio</label>
                     <input 
                       type="text" 
-                      id="company" 
+                      id="company"
+                      name="company"
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                       placeholder="Nome do local"
                     />
@@ -267,6 +289,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     <input
                       type="text"
                       id="location"
+                      name="location"
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors"
                       placeholder="Ex: Recife/PE"
@@ -276,7 +299,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-1.5">Mensagem (Opcional)</label>
                     <textarea 
-                      id="message" 
+                      id="message"
+                      name="message"
                       rows={3}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange transition-colors resize-none"
                       placeholder="Conte um pouco sobre sua necessidade..."
